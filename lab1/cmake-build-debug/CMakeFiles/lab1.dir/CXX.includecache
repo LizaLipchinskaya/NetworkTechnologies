@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/elizavetalipcinskaa/CLionProjects/lab1/CheckAddress.h
+iostream
+-
+set
+-
+map
+-
+ctime
+-
+arpa/inet.h
+-
+sstream
+-
+
+/Users/elizavetalipcinskaa/CLionProjects/lab1/main.cpp
+sys/socket.h
+-
+cstring
+-
+unistd.h
+-
+fcntl.h
+-
+memory
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+ctime
+-
+CheckAddress.h
+/Users/elizavetalipcinskaa/CLionProjects/lab1/CheckAddress.h
+
