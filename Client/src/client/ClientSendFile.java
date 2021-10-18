@@ -2,6 +2,7 @@ package client;
 
 import java.io.*;
 import java.net.Socket;
+import com.google.common.hash.*;
 
 public class ClientSendFile {
     public static void sendFile(String path, String addr, int port) throws IOException {
@@ -16,7 +17,10 @@ public class ClientSendFile {
 
         byte[] buf = new byte[4096];
         int i;
+        String sha256hex;
+
         while ((i = fileIn.read(buf)) != -1) {
+            sha256hex = Hashing.sha256().hashBytes(buf).toString();
             out.write(buf, 0, i);
             out.flush();
         }
