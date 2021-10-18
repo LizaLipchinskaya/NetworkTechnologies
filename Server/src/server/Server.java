@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.Executors;
 import static server.InformationTransferFile.*;
+import com.google.common.hash.Hashing;
 
 class Handler extends Thread {
     private Socket socket;
@@ -54,9 +55,19 @@ class Handler extends Thread {
             checkSpeed = new Thread(speed);
             checkSpeed.start();
 
+            String sha256hex;
+            String sha256hexFile;
+
             while (((countByteRead = in.read(buf)) != -1) && countBytes(ID) < fileSize) {
-                changeReadBytes(ID, countByteRead);
-                fileOut.write(buf, 0, countByteRead);
+                sha256hexFile = in.readUTF();
+                sha256hex = Hashing.sha256().hashBytes(buf).toString();
+
+                if (sha256hex == sha256hexFile) {
+                    changeReadBytes(ID, countByteRead);
+                    fileOut.write(buf, 0, countByteRead);
+                } else {
+                    System.out.println("Not the original file");
+                }
             }
 
             speed.finish();
